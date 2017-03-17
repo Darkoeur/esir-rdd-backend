@@ -1,0 +1,58 @@
+{
+  "data": {
+    "user": [
+      {
+        "nom": "GAUTRAIN",
+        "prenom": "Antoine",
+        "code": "123",
+        "specialite": "Systèmes d'information",
+        "email": "antoine",
+        "createdAt": "2017-03-17T18:08:08.262Z",
+        "id": 21
+      },
+      {
+        "nom": "Cocain",
+        "prenom": "Billy",
+        "code": "12",
+        "specialite": "Matériaux",
+        "email": "bill",
+        "createdAt": "2017-03-17T18:56:38.625Z",
+        "id": 22
+      }
+    ]
+  },
+  "schema": {
+    "user": {
+      "nom": {
+        "type": "string"
+      },
+      "prenom": {
+        "type": "string"
+      },
+      "email": {
+        "type": "string",
+        "unique": true
+      },
+      "specialite": {
+        "type": "string"
+      },
+      "code": {
+        "type": "string"
+      },
+      "id": {
+        "type": "integer",
+        "autoIncrement": true,
+        "primaryKey": true,
+        "unique": true
+      },
+      "createdAt": {
+        "type": "datetime"
+      }
+    }
+  },
+  "counters": {
+    "user": {
+      "id": 22
+    }
+  }
+}
