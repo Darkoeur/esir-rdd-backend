@@ -32,6 +32,21 @@ module.exports = {
 		code: {
 			type: 'string',
 			required: true
+		},
+		// Here we'll use one-to-many associations
+		// In order to keep the data synced, we have to modify
+		// On the 'via' attribute, from the collection and not from there
+		profil: {
+			collection: 'profil',
+			via: 'associatedUser'
+		},
+		commentairesRecus: {
+			collection: 'comment',
+			via: 'receveur'
+		},
+		commentairesDonnes: {
+			collection: 'comment',
+			via: 'auteur'
 		}
 	 },
 	 

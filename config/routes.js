@@ -36,9 +36,13 @@ module.exports.routes = {
     view: 'homepage'
   },
   
+  // JSON API
+  
   'PUT /signup': 'UserController.register',
   'PUT /signin': 'UserController.authenticate',
-  'GET /logout': 'UserController.logout'
+  'GET /logout': 'UserController.logout',
+  'GET /state': 'UserController.isAuthenticated',
+  'GET /refresh': 'ProfilController.getInfo'
 
   /***************************************************************************
   *                                                                          *

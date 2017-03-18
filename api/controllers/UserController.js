@@ -25,9 +25,12 @@ module.exports = {
 			if (user.code !== req.param('code')) {
 				return res.json({success:false, message:'Code invalide !'});
 			}
+			console.log('A user has logged in with id :' + user.id);
 			
-			req.session.userId = user.id;
-			return res.json({success:true, message:'Bienvenue ' + user.prenom + ' !', token: req.session.userId});
+			req.session.authenticated = true;
+			req.session.user = user.id;
+			
+			return res.json({success:true, message:'Bienvenue ' + user.prenom + ' !', token: req.session.user});
 			
 		});
 		
@@ -35,16 +38,22 @@ module.exports = {
 		
 	},
 	
+	isAuthenticated: function(req,res) {
+		console.log('A user wants to know his state with id : ' + req.session.user);
+		if(!req.session.user) return res.json({success:false, message:'Vous n\'êtes pas connecté.'});
+		return res.json({success:true,message:'Vous êtes connecté !'});
+	},
+	
 	logout: function(req, res) {
-		if(!req.session.numero) return res.json({success:false, message:'Vous n\'êtes pas connecté.'});
+		if(!req.session.user) return res.json({success:false, message:'Vous n\'êtes pas connecté.'});
 		
-		User.findOne(req.session.userId, function foundOne(err, user) {
+		User.findOne(req.session.user, function foundOne(err, user) {
 			if (err) return res.json({success:false, message:'Impossible de trouver l\'utilisateur correspondant.'});
 			if (!user) {
 				console.log('Session refers to a no longer existant user');
 			}
 			
-			req.session.userId = null;
+			req.session.user = null;
 			
 			return res.json({success:true, message:'Déconnexion effectuée !'});
 		});
